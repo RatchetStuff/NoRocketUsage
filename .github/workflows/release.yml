@@ -23,7 +23,7 @@ jobs:
           run: |
             mkdir -p bin
             cd src
-            zip -r $(git rev-parse --show-toplevel)/bin/${GITHUB_REPOSITORY#*/}-${version}.zip *
+            zip -r $(git rev-parse --show-toplevel)/bin/NoRocketUsage-${version}.zip *
         
         - name: Create release
           env:
