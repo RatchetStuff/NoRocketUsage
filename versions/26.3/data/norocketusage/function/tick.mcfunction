@@ -1,1 +1,0 @@
-execute as @a[nbt={FallFlying:1b}] at @s if items entity @s armor.chest elytra if entity @e[distance=..3,nbt={Life:0},type=firework_rocket] run item modify entity @s armor.chest {type:"set_damage",damage:0}

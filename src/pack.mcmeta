@@ -1,0 +1,43 @@
+{
+    "pack": {
+        "description": "Rockets are annoying!",
+        "pack_format": 7,
+        "min_format": 7,
+        "max_format": 999,
+        "supported_formats": [
+            7,
+            999
+        ]
+    },
+    "overlays": {
+        "entries": [
+            {
+                "directory": "format_41",
+                "formats": [
+                    41,
+                    999
+                ],
+                "min_format": 41,
+                "max_format": 999
+            },
+            {
+                "directory": "format_45",
+                "formats": [
+                    45,
+                    999
+                ],
+                "min_format": 45,
+                "max_format": 999
+            },
+            {
+                "directory": "format_111",
+                "formats": [
+                    111,
+                    999
+                ],
+                "min_format": 111,
+                "max_format": 999 
+            }
+        ]
+    }
+}

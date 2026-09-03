@@ -21,13 +21,9 @@ jobs:
           env:
             version: ${{ inputs.version }}
           run: |
-            for dir in versions/*/; do
-              mc_version=$(basename "$dir")
-              (
-                cd "$dir"
-                zip -r $(git rev-parse --show-toplevel)/bin/${GITHUB_REPOSITORY#*/}-${version}+mc${mc_version}.zip *
-              )
-            done
+            mkdir -p bin
+            cd src
+            zip -r $(git rev-parse --show-toplevel)/bin/${GITHUB_REPOSITORY#*/}-${version}.zip *
         
         - name: Create release
           env:
