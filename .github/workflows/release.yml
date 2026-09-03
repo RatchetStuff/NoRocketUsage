@@ -25,7 +25,7 @@ jobs:
               mc_version=$(basename "$dir")
               (
                 cd "$dir"
-                zip -r $(git rev-parse --show-toplevel)/bin/${GITHUB_REPOSITORY#*/}-${version}+${mc_version}.zip *
+                zip -r $(git rev-parse --show-toplevel)/bin/${GITHUB_REPOSITORY#*/}-${version}+mc${mc_version}.zip *
               )
             done
         
@@ -34,7 +34,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             tag: ${{ inputs.version }}
           run: |
-            gh release create "$tag" --repo="$GITHUB_REPOSITORY" --title="${GITHUB_REPOSITORY#*/}+${tag}" --generate-notes
+            gh release create "$tag" --repo="$GITHUB_REPOSITORY" --title="${tag}" --generate-notes
         
         - name: Upload assets to GitHub
           uses: AButler/upload-release-assets@v4.0
