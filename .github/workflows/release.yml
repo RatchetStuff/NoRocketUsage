@@ -3,25 +3,19 @@ on:
     workflow_dispatch:
       inputs:
         version:
-          description: Appended version
+          description: "Release version (e.g. 26.1.0)"
           required: true
           type: string
-          default: "a"
 jobs:
     release:
         runs-on: ubuntu-latest
         steps:
         - name: Checkout repository
-          uses: actions/checkout@v6
+          uses: actions/checkout@v7
         
         - name: Install dependencies
           run: |
             sudo apt install zip
-
-        - name: Get current date
-          id: date
-          run: |
-            echo "date=$(date +"%Y%m%d")" >> $GITHUB_OUTPUT
         
         - name: Create assets
           env:
@@ -31,14 +25,14 @@ jobs:
               mc_version=$(basename "$dir")
               (
                 cd "$dir"
-                zip -r $(git rev-parse --show-toplevel)/bin/${GITHUB_REPOSITORY#*/}+${{ steps.date.outputs.date }}${version}+${mc_version}.zip *
+                zip -r $(git rev-parse --show-toplevel)/bin/${GITHUB_REPOSITORY#*/}-${version}+${mc_version}.zip *
               )
             done
         
         - name: Create release
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            tag: ${{ steps.date.outputs.date }}${{ inputs.version }}
+            tag: ${{ inputs.version }}
           run: |
             gh release create "$tag" --repo="$GITHUB_REPOSITORY" --title="${GITHUB_REPOSITORY#*/}+${tag}" --generate-notes
         
@@ -47,4 +41,4 @@ jobs:
           with:
             files: "bin/*"
             repo-token: ${{ secrets.GITHUB_TOKEN }}
-            release-tag: ${{ steps.date.outputs.date }}${{ inputs.version }}
+            release-tag: ${{ inputs.version }}
