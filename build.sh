@@ -7,4 +7,4 @@ fi
 mkdir -p bin
 
 cd src
-zip -r "$TOPLEVEL"/bin/$(basename "$TOPLEVEL")-SNAPSHOT.zip *
+zip -r "$TOPLEVEL"/bin/NoRocketUsage-SNAPSHOT.zip *
